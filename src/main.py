@@ -1,9 +1,22 @@
-from models.candidate import Candidate
+# from parsers.csv_parser import CSVParser
 
-candidate = Candidate(
-    full_name="John Smith",
-    emails=["john@gmail.com"],
-    phones=["9876543210"]
-)
 
-print(candidate.model_dump())
+# parser = CSVParser("samples/candidates.csv")
+
+# candidates = parser.parse()
+
+# for candidate in candidates:
+#     print(candidate.model_dump())
+
+from pathlib import Path
+from parsers.csv_parser import CSVParser
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+csv_file = BASE_DIR / "samples" / "candidates.csv"
+
+parser = CSVParser(csv_file)
+
+candidates = parser.parse()
+
+for candidate in candidates:
+    print(candidate.model_dump())
