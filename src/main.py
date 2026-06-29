@@ -1,22 +1,27 @@
-# from parsers.csv_parser import CSVParser
-
-
-# parser = CSVParser("samples/candidates.csv")
-
-# candidates = parser.parse()
-
-# for candidate in candidates:
-#     print(candidate.model_dump())
-
 from pathlib import Path
+
 from parsers.csv_parser import CSVParser
+from parsers.json_parser import JSONParser
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 csv_file = BASE_DIR / "samples" / "candidates.csv"
+json_file = BASE_DIR / "samples" / "candidates.json"
 
-parser = CSVParser(csv_file)
+print("=" * 50)
+print("CSV Candidates")
+print("=" * 50)
 
-candidates = parser.parse()
+csv_parser = CSVParser(csv_file)
 
-for candidate in candidates:
+for candidate in csv_parser.parse():
+    print(candidate.model_dump())
+
+print("\n" + "=" * 50)
+print("JSON Candidates")
+print("=" * 50)
+
+json_parser = JSONParser(json_file)
+
+for candidate in json_parser.parse():
     print(candidate.model_dump())

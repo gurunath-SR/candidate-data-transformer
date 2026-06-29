@@ -1,0 +1,14 @@
+[
+    {
+        "full_name": "David Miller",
+        "email": "david@gmail.com",
+        "phone": "9988771122",
+        "location": "Mumbai"
+    },
+    {
+        "full_name": "Emma Watson",
+        "email": "emma@gmail.com",
+        "phone": "9876501234",
+        "location": "Delhi"
+    }
+]
