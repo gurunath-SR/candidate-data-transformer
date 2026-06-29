@@ -25,3 +25,10 @@ json_parser = JSONParser(json_file)
 
 for candidate in json_parser.parse():
     print(candidate.model_dump())
+    
+    
+from normalizers.name_normalizer import normalize_name
+
+print(normalize_name("john smith"))
+print(normalize_name("JOHN SMITH"))
+print(normalize_name("jOhN smITH"))
