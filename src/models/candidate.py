@@ -20,6 +20,7 @@ class Education(BaseModel):
 
 
 class Candidate(BaseModel):
+
     candidate_id: Optional[str] = None
 
     full_name: Optional[str] = None
@@ -43,5 +44,8 @@ class Candidate(BaseModel):
     education: List[Education] = Field(default_factory=list)
 
     provenance: Dict[str, str] = Field(default_factory=dict)
+
+    # NEW
+    field_confidence: Dict[str, float] = Field(default_factory=dict)
 
     overall_confidence: float = 0.0

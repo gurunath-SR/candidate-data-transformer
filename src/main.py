@@ -1,3 +1,16 @@
+"""
+Candidate Data Transformer
+
+Version : 2.0
+
+Author : Gurunath Rachannavar
+
+Description:
+Multi-source Candidate Parsing, Matching,
+Normalization and Intelligent Profile Merging.
+"""
+
+
 from pathlib import Path
 
 from logging_utils.logger import logger
@@ -11,6 +24,9 @@ from parsers.resume_parser import ResumeParser
 
 from utils.output_writer import save_candidate
 from parsers.linkedin_parser import LinkedInParser
+from utils.resume_score import calculate_resume_score
+from utils.candidate_ranker import calculate_candidate_rank
+from utils.candidate_summary import print_candidate_summary
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,12 +64,56 @@ def main():
             print("=" * 70)
             print("MERGED CANDIDATE")
             print("=" * 70)
-            print(merged.model_dump())
+            print_candidate_summary(merged)
 
             print("\n" + "=" * 70)
             print("DETECTED SKILLS")
             print("=" * 70)
 
+            print("\n" + "=" * 70)
+            print("RESUME QUALITY")
+            print("=" * 70)
+
+            score, fields = calculate_resume_score(merged)
+
+            print(f"\nOverall Resume Score : {score}%")
+
+            stars = "★" * (score // 20) + "☆" * (5 - score // 20)
+
+            print(stars)
+
+            print("\nSection Status")
+
+            for field, present in fields.items():
+
+                symbol = "✔" if present else "✘"
+
+                print(f"{symbol} {field}")
+            
+            
+            print("\n" + "=" * 70)
+            print("CANDIDATE RANK")
+            print("=" * 70)
+
+            rank = calculate_candidate_rank(merged)
+
+            print(f"\nCandidate Score : {rank}")
+
+            if rank >= 90:
+                print("★★★★★ Outstanding Candidate")
+
+            elif rank >= 70:
+                print("★★★★☆ Strong Candidate")
+
+            elif rank >= 50:
+                print("★★★☆☆ Good Candidate")
+
+            elif rank >= 30:
+                print("★★☆☆☆ Average Candidate")
+
+            else:
+                print("★☆☆☆☆ Needs Improvement")
+            
             if merged.skills:
                 for skill in merged.skills:
                     print("-", skill.name)

@@ -1,7 +1,6 @@
 import re
 
 from models.candidate import Education
-from config.degrees import KNOWN_DEGREES
 
 
 class EducationExtractor:
@@ -11,24 +10,32 @@ class EducationExtractor:
 
         education = []
 
-        year_match = re.search(r"(20\d{2})", text)
+        degree = re.search(
 
-        year = year_match.group(1) if year_match else None
+            r"(B\.?E|BTech|B\.Tech|Bachelor).*?"
+            r"(Computer Science|CSE|Information Science|AI|ML).*?"
+            r"(\d{4})",
 
-        for degree in KNOWN_DEGREES:
+            text,
 
-            if degree.lower() in text.lower():
+            re.IGNORECASE | re.DOTALL,
 
-                education.append(
+        )
 
-                    Education(
-                        institution="Unknown",
-                        degree=degree,
-                        year=year
-                    )
+        if degree:
+
+            education.append(
+
+                Education(
+
+                    institution="Unknown",
+
+                    degree=degree.group().replace("\n", " "),
+
+                    year=degree.group(3)
 
                 )
 
-                break
+            )
 
         return education

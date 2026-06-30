@@ -17,18 +17,51 @@ def create_candidate(
     links=None,
 ):
 
+    confidence = SOURCE_CONFIDENCE[source]
+
     return Candidate(
+
         full_name=normalize_name(full_name),
+
         emails=[normalize_email(email)] if email else [],
+
         phones=[normalize_phone(phone)] if phone else [],
+
         location=normalize_location(location),
+
         headline=headline,
+
         links=links or {},
+
         provenance={
             "full_name": source,
             "email": source,
             "phone": source,
             "location": source,
         },
-        overall_confidence=SOURCE_CONFIDENCE[source],
+
+        field_confidence={
+
+            "full_name": confidence,
+
+            "emails": confidence,
+
+            "phones": confidence,
+
+            "location": confidence,
+
+            "headline": confidence,
+
+            "skills": confidence,
+
+            "experience": confidence,
+
+            "education": confidence,
+
+            "links": confidence
+
+        },
+
+        overall_confidence=confidence
+
     )

@@ -1,31 +1,17 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-
-# Virtual Environment
 venv/
-.env
 
-# Logs
-logs/
+__pycache__/
+
+*.pyc
+
 *.log
 
-# Output
-data/output/
-
-# IDE
-.vscode/
 .idea/
 
-# OS Files
+.vscode/
+
+data/output/*.json
+
 .DS_Store
+
 Thumbs.db
-
-# Pytest
-.pytest_cache/
-
-# Coverage
-.coverage
-htmlcov/

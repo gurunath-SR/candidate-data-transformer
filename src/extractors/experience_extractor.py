@@ -8,21 +8,23 @@ class ExperienceExtractor:
     @staticmethod
     def extract(text):
 
-        experience = []
+        experiences = []
 
         pattern = re.findall(
 
-            r"([A-Za-z ]+)\n([A-Za-z ]+)\n((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec).+)",
+            r"(Machine Learning Intern|Software Engineer|Data Scientist|Backend Developer|Frontend Developer|Python Developer).*?"
+            r"(Google|Microsoft|Amazon|Infosys|TCS|Wipro|Accenture|IBM).*?"
+            r"(Jan.*?Present|Feb.*?Present|Mar.*?Present|\d{4}\s*-\s*\d{4})",
 
             text,
 
-            re.I
+            re.IGNORECASE | re.DOTALL,
 
         )
 
-        for company, role, duration in pattern:
+        for role, company, duration in pattern:
 
-            experience.append(
+            experiences.append(
 
                 Experience(
 
@@ -36,4 +38,4 @@ class ExperienceExtractor:
 
             )
 
-        return experience
+        return experiences
