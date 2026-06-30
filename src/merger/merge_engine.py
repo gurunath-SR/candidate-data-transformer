@@ -41,7 +41,10 @@ class MergeEngine:
                 candidate2.years_experience,
             ),
 
-            skills=candidate1.skills + candidate2.skills,
+            skills=list({
+                skill.name.lower(): skill
+                for skill in candidate1.skills + candidate2.skills
+            }.values()),
 
             experience=candidate1.experience + candidate2.experience,
 
