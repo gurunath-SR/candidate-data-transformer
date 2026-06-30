@@ -10,6 +10,7 @@ from parsers.json_parser import JSONParser
 from parsers.resume_parser import ResumeParser
 
 from utils.output_writer import save_candidate
+from parsers.linkedin_parser import LinkedInParser
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 csv_file = BASE_DIR / "samples" / "candidates.csv"
 json_file = BASE_DIR / "samples" / "candidates.json"
 resume_file = BASE_DIR / "samples" / "resumes" / "aryan_resume.pdf"
+linkedin_file = BASE_DIR / "samples" / "linkedin_profile.json"
 
 
 def main():
@@ -32,6 +34,9 @@ def main():
         logger.info("Reading Resume Candidate")
         resume_candidate = ResumeParser(resume_file).parse()
 
+        logger.info("Reading linkdin Candidate")
+        linkedin_candidate = LinkedInParser(linkedin_file).parse()
+        
         logger.info("Matching Candidate")
 
         if CandidateMatcher.is_same_candidate(csv_candidate, resume_candidate):

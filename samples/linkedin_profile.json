@@ -1,0 +1,37 @@
+{
+    "full_name": "Aryan Ganesh",
+    "headline": "Machine Learning Engineer",
+    "location": "Bangalore",
+
+    "email": "aryanganesh13@gmail.com",
+
+    "phone": "6361334168",
+
+    "github": "https://github.com/aryanganesh",
+
+    "linkedin": "https://linkedin.com/in/aryanganesh",
+
+    "skills": [
+        "Python",
+        "Machine Learning",
+        "SQL",
+        "TensorFlow",
+        "Docker"
+    ],
+
+    "experience": [
+        {
+            "company": "ABC Technologies",
+            "role": "Machine Learning Intern",
+            "duration": "Jan 2025 - Present"
+        }
+    ],
+
+    "education": [
+        {
+            "institution": "KLE Technological University",
+            "degree": "B.E Computer Science",
+            "year": "2027"
+        }
+    ]
+}

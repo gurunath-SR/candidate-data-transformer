@@ -43,12 +43,18 @@ class MergeEngine:
 
             skills=list({
                 skill.name.lower(): skill
-                for skill in candidate1.skills + candidate2.skills
+                for skill in (candidate1.skills + candidate2.skills)
             }.values()),
 
-            experience=candidate1.experience + candidate2.experience,
+            experience=list({
+                (exp.company, exp.role): exp
+                for exp in (candidate1.experience + candidate2.experience)
+            }.values()),
 
-            education=candidate1.education + candidate2.education,
+            education=list({
+                (edu.institution, edu.degree): edu
+                for edu in (candidate1.education + candidate2.education)
+            }.values()),
 
             provenance={
                 **candidate1.provenance,
